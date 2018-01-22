@@ -1,0 +1,24 @@
+#folder
+classes/
+lib/
+target/*
+#fixed file
+inlucdeLib/*
+.class
+.exe
+.log
+.prefs
+.project
+.classpath
+.metadata
+.settings
+.DS_Store
+Thumbs.db
+.project
+*.iml
+*.ipr
+*.iws
+*.tar.gz
+.idea
+target
+auto-config.xml.log

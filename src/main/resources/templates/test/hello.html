@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<script>
+      function test() {
+         var a = document.getElementById("begin").valueOf().value;
+         var b = document.getElementById("end").valueOf().value;
+         var a1 = Number(a);
+         var b1 = Number(b);
+         var a2 = parseInt(a);
+         var b2 = parseInt(b);
+         alert(b1 - a1);
+         alert(b2 - a2);
+      }
+</script>
+<body>
+<p th:text="'Hello, ' + ${test} + '!'" />
+    开始:<input type="text" name="begin" id="begin"/><br/>
+    结束:<input type="text" name="end" id="end"/><br/>
+    <input type="button" onclick="test()" value="校验"/>
+</body>
+</html>
