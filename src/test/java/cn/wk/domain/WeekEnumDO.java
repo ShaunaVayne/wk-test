@@ -1,6 +1,10 @@
 package cn.wk.domain;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Stream;
 
 /**
  * @Author: WangKun
@@ -35,4 +39,14 @@ public enum WeekEnumDO implements Serializable {
 		this.strCode = strCode;
 		this.strValue = strValue;
 	}
+
+	public static final Map<String, WeekEnumDO> WEEK_MAP =
+			Stream.of(WeekEnumDO.values()).collect(Collector.of(
+					() -> new HashMap<>(),
+					(a, b) -> a.put(b.getStrCode(), b),
+					(a, b) -> {
+						a.putAll(b);
+						return a;
+					}
+			));
 }

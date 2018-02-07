@@ -24,7 +24,7 @@ public class SecurityAESUtil {
     private static String PASSWORD = "PASSWORD";
 
     public static void main(String[] args) {
-		System.out.println(SecurityAESUtil.decrypt("RTA2MjlDM0U4NjU4Q0M0MUFFQzgyREQxRTlFQ0E0MUY0RUNCMjI3RDEyM0Q4RkZCQkJBQjVBRDZDQjUwNDUzNDkyRDAxM0ZERjQ0RTAyMjMyN0UyOUQwMjBFQUM4QTFD"));
+		System.out.println(SecurityAESUtil.decrypt("RTA2MjlDM0U4NjU4Q0M0MUFFQzgyREQxRTlFQ0E0MUYwMTFFRUQxNTk5NUI4MjgxRTc1NUZCQTE0MUIwNzI1OEYzREIwNzNBRjNCNTI4MkY3NjlEMDkwQzgzRjZDRkY2"));
 
 	}
 

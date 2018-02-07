@@ -3,6 +3,8 @@ package cn.wk.test;
 import cn.wk.domain.WeekEnumDO;
 import org.junit.Test;
 
+import java.util.Map;
+
 
 /**
  * @Author: WangKun
@@ -45,6 +47,16 @@ public class EnumTest {
 				"    t1.PAY_TYPE = ?)";
 		String s = "SELECT COUNT(1) AS rowCount FROM (SELECT t2.ORDER_SEQ, t1.PAYINFO_SEQ, t2.OPER_STAT  AS FKSTAT, t2.ORDER_STAT AS DDSTAT, t1.BANK_ID, t1.ORDER_STAT AS CKSTAT FROM t_scd_order_payinfo t1, T_SCD_ORDER t2 WHERE t1.PAYINFO_SEQ = t2.PAYINFO_SEQ AND t1.PAYINFO_SEQ = ? AND t2.OPER_STAT IN ('S0B', 'S0C', 'S0F') AND t1.PAY_TYPE = ?)";
 		System.out.println(sql2);
+	}
+
+	@Test
+	public void test4() {
+		Map<String, WeekEnumDO> weekMap = WeekEnumDO.WEEK_MAP;
+		weekMap.entrySet().stream().forEach(e -> {
+			System.out.println(e.getKey() +"-------------"+ e.getValue());
+		});
+		WeekEnumDO weekEnumDO = WeekEnumDO.WEEK_MAP.get("1");
+		System.out.println(weekEnumDO);
 	}
 
 }
