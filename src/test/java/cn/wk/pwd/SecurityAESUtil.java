@@ -24,8 +24,7 @@ public class SecurityAESUtil {
     private static String PASSWORD = "PASSWORD";
 
     public static void main(String[] args) {
-		System.out.println(SecurityAESUtil.decrypt("RTA2MjlDM0U4NjU4Q0M0MUFFQzgyREQxRTlFQ0E0MUYwMTFFRUQxNTk5NUI4MjgxRTc1NUZCQTE0MUIwNzI1OEYzREIwNzNBRjNCNTI4MkY3NjlEMDkwQzgzRjZDRkY2"));
-
+		System.out.println(SecurityAESUtil.decrypt("NkJDQzY1QkFEMDVCQThFQkU1RENFRjI1NjQ3QTc2MUVGMEIzNjZCQjBDRDE2NjBEM0M3MEI2RDY0OUJBMUUwMjhDOUIwMTMzODkxMTNENTBERTM0QjVFMjY3QUFGM0JB"));
 	}
 
 
@@ -36,7 +35,7 @@ public class SecurityAESUtil {
      * @return  String
      * @Date    2015年2月7日
      * 更新日志
-     * 2015年2月7日   首次创建
+     * 2015年2月7日   首次创建`
      *
      */
     public static String encryptAES(String content) {

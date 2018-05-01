@@ -936,7 +936,7 @@ public class BlowFish {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(decrypt("c4654af588fb3747a3477b9e9a8d0e6c253f38e55f58178ed2e11b9fa239e7d8"));
+		System.out.println(decrypt("99fd01722b0cbedba58ec9d7bd72f090bbfca4fc4467495bff1d424bf122337d"));
 	}
 
 }
