@@ -1,9 +1,12 @@
 package cn.wk.test;
 
 import cn.wk.domain.WeekEnumDO;
+import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -58,5 +61,48 @@ public class EnumTest {
 		WeekEnumDO weekEnumDO = WeekEnumDO.WEEK_MAP.get("1");
 		System.out.println(weekEnumDO);
 	}
+
+	@Test
+	public void test5() {
+		Map<String, String> map = new HashMap<>();
+		map.put("1", "a");
+		map.put("2", "b");
+		System.out.println(JSON.toJSONString(map));
+		System.out.println("sss");
+	}
+
+
+	@Test
+	public void test6() {
+		Object[] o = new Object[2];
+		o[0] = "aaa";
+		o[1] = 22;
+		System.out.println(JSON.toJSONString(o));
+	}
+
+	@Test
+	public void test7() {
+		Tree t1 = new Tree();
+		t1.setId(1); t1.setName("a");
+		Tree t2 = new Tree();
+		t2.setId(2); t2.setName("b");
+		Tree t3 = new Tree();
+		t3.setId(3); t3.setName("c");
+		Tree t4 = new Tree();
+		t4.setId(4); t4.setName("d");
+
+
+		List<Tree> treeList1 = Arrays.asList(t1, t2, t3, t4);
+		List<Tree> treeList2 = Arrays.asList(t1, t2);
+		List<Integer> idList = treeList2.stream().map(Tree::getId).collect(Collectors.toList());
+		treeList1.stream().filter(tree -> idList.contains(tree.getId())).collect(Collectors.toList())
+				.stream().forEach(s -> {
+			s.setFlag(Boolean.TRUE);
+		});
+		System.out.println(treeList1);
+
+	}
+
+
 
 }
