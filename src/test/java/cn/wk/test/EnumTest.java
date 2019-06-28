@@ -1,9 +1,15 @@
 package cn.wk.test;
 
+import cn.wk.dao.AddParameterConfigReq;
 import cn.wk.domain.WeekEnumDO;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
+import org.springframework.util.Base64Utils;
 
-import java.util.Map;
+import java.nio.charset.Charset;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -100,10 +106,74 @@ public class EnumTest {
 
 	}
 
+	@Test
+	public void test8() {
+		//Convert.ToBase64String(Encoding.ASCII.GetBytes(0 + ":" + "ss"));
+
+		//byte[] ssses = DatatypeConverter.parseBase64Binary("sss");
+		String string = 0 + ":" + "testkey";
+		String s = base64Encode(string);
+		System.out.println(s);
+		byte[] encode = Base64Utils.encode(string.getBytes());
+		String s1 = new String(encode, Charset.forName("UTF-8"));
+		System.out.println(s1);
+	}
 
 
 	@Test
-	public void test5() {
+	public void test9() {
+		String url = "https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code";
+		String replace = url.replace("APPID", "wx380efe686f129dd0").replace("SECRET", "222").replace("JSCODE", "3333");
+		System.out.println(replace);
+	}
+
+	@Test
+	public void test10() {
+		String a = "aaaxxx";
+		String b = a + UUID.randomUUID().toString().replace("-", "").toLowerCase();
+		System.out.println(a);
+		System.out.println(b);
+		String c = b.replace(a,"");
+		System.out.println(c);
+	}
+
+
+	public static void main(String[] args){
+		String s = "xyzXYZ";
+		System.out.println("The base64 encode string value is " + base64Encode(s));
+		System.out.println("The base64 decode string value is " + base64Decode(base64Encode(s)));
+	}
+	// 编码
+	public static String base64Encode(String token) {
+		byte[] encodedBytes = Base64.getEncoder().encode(token.getBytes());
+		return new String(encodedBytes, Charset.forName("UTF-8"));
+	}
+	// 解码
+	public static String base64Decode(String token) {
+		byte[] decodedBytes = Base64.getDecoder().decode(token.getBytes());
+		return new String(decodedBytes, Charset.forName("UTF-8"));
+	}
+
+	public static String stringToAscii(String value)
+	{
+		StringBuffer sbu = new StringBuffer();
+		char[] chars = value.toCharArray();
+		for (int i = 0; i < chars.length; i++) {
+			if(i != chars.length - 1)
+			{
+				sbu.append((int)chars[i]).append(",");
+			}
+			else {
+				sbu.append((int)chars[i]);
+			}
+		}
+		return sbu.toString();
+	}
+
+
+
+	@Test
+	public void test11() {
 		List<String> strings = Arrays.asList("aaa", "bbb", "ccc", "aaa");
 		Set<String> strings1 = new HashSet<>();
 		strings1.addAll(strings);
@@ -111,7 +181,7 @@ public class EnumTest {
 	}
 
 	@Test
-	public void test6() {
+	public void test12() {
 		String str = "15452176890960001154571";
 		String[] split = str.split(",");
 		Arrays.stream(split).forEach(e -> {
@@ -120,7 +190,7 @@ public class EnumTest {
 	}
 
 	@Test
-	public void test7() {
+	public void test13() {
 		String a = "1";
 		String b = "2";
 		String c = "3";
@@ -131,7 +201,7 @@ public class EnumTest {
 	}
 
 	@Test
-	public void test8() {
+	public void test14() {
 		AddParameterConfigReq req1 = new AddParameterConfigReq("", "businessCategory", "业务分类", "BY", "工单字段", "gd_setting", "工单设置", "业务接待", "order");
 		AddParameterConfigReq req2 = new AddParameterConfigReq("", "adviser", "业务员", "yes", "工单字段", "gd_setting", "工单设置", "业务接待", "order");
 		AddParameterConfigReq req3 = new AddParameterConfigReq("", "mileageRequired", "进场里程是否必填", "yes", "工单字段", "gd_setting", "工单设置", "业务接待", "order");
@@ -158,7 +228,7 @@ public class EnumTest {
 	}
 
 	@Test
-	public void test9() {
+	public void test15() {
 		String a = "京12345";
 		String substring1 = a.substring(0, 1);
 		String substring = a.substring(1);
@@ -167,7 +237,7 @@ public class EnumTest {
 	}
 
 	@Test
-	public void test10() {
+	public void test16() {
 
 	}
 
