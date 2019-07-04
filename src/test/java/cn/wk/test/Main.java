@@ -2,10 +2,9 @@ package cn.wk.test;
 
 import cn.wk.domain.TestCopy;
 import cn.wk.domain.TestList;
-import com.alibaba.fastjson.JSON;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
-import org.thymeleaf.util.StringUtils;
 
 import java.security.SecureRandom;
 import java.text.DateFormat;
@@ -13,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -75,6 +75,13 @@ public class Main {
 
 	@Test
 	public void test4() {
+		IntStream.range(0, 5).forEach(e -> {
+			System.out.println(e);
+		});
+	}
+
+	@Test
+	public void test_4() {
 		cn.wk.domain.Test test = new cn.wk.domain.Test();
 		test.setName("a");
 		TestList testList = new TestList();
