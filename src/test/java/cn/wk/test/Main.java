@@ -2,9 +2,9 @@ package cn.wk.test;
 
 import cn.wk.domain.TestCopy;
 import cn.wk.domain.TestList;
+import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.domain.Page;
 import org.thymeleaf.util.StringUtils;
 
 import java.security.SecureRandom;
@@ -286,6 +286,7 @@ public class Main {
 	     }
 	     System.out.println(res);
 	}
+
 
 	@Test
 	public void test() {
