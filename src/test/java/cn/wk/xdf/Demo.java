@@ -46,7 +46,23 @@ public class Demo {
         log.info("success:{}", JSON.toJSONString(stringMap2));
     }
 
-    private <T> Map<String,T> listToMap2(List<? extends T> userVOS, String fieldName, Class<T> tClass) {
+    @Test
+    public void test2() {
+        PeopleVO p1 = new PeopleVO(1l,"王明明","上海","sh");
+        PeopleVO p2 = new PeopleVO(2l,"哈哈","北京","bj");
+        PeopleVO p3 = new PeopleVO(3l,"呵呵","广州","gz");
+        List<PeopleVO> peopleVOS = Arrays.asList(p1, p2, p3);
+        //List<PeopleVO> peopleVOS = null
+        PeopleVO peopleVO = peopleVOS.stream().findFirst().get();
+
+        /*peopleVOS = peopleVOS
+                .stream()
+                .filter(e -> e.getId() == 1l)
+                .collect(Collectors.toList());*/
+        log.info("success:{}", JSON.toJSONString(peopleVO));
+    }
+
+    private <T> Map<String,T> listToMap2(List<?> userVOS, String fieldName, Class<T> tClass) {
         HashMap<String, T> collect = userVOS.stream().collect(Collectors.toMap(
                 e -> {
                     Class<?> c = e.getClass();
@@ -60,7 +76,7 @@ public class Demo {
                     }
                     return key;
                 },
-                e -> e,
+                e -> (T)e,
                 (x, y) -> {
                     throw new AssertionError();
                 },
@@ -72,12 +88,12 @@ public class Demo {
 
     /**
      * 通用的list转为map的方法, list的包含的是实体对象, map的key为实体的主键
-     * @param userVOS
+     * @param list
      * @param fieldName
      * @return
      */
-    private Map<String,Object> listToMap(List<?> userVOS, String fieldName) {
-        HashMap<String,Object> res = userVOS.stream().collect(Collectors.toMap(
+    private Map<String,Object> listToMap(List<?> list, String fieldName) {
+        HashMap<String,Object> res = list.stream().collect(Collectors.toMap(
                 e -> {
                     Class<?> c = e.getClass();
                     String key = "";
