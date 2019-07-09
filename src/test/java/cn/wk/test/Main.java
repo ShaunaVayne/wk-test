@@ -2,6 +2,10 @@ package cn.wk.test;
 
 import cn.wk.domain.TestCopy;
 import cn.wk.domain.TestList;
+import cn.wk.xdf.OrderPO;
+import cn.wk.xdf.UserVO;
+import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
@@ -22,6 +26,7 @@ import java.util.stream.Stream;
  * @ProjectName: SpringBootTest2
  * @Version: 1.0.0
  */
+@Slf4j
 public class Main {
 	public static void main(String[] args) {
 		/*System.out.println(String.valueOf(Integer.valueOf(new SimpleDateFormat("yyyyMMdd").format(new Date())) - 1));*/
@@ -292,6 +297,95 @@ public class Main {
 			 res = false;
 	     }
 	     System.out.println(res);
+	}
+
+	@Test
+	public void test17() {
+		List a = new ArrayList();
+		List list = test17_02(a);
+		System.out.println(list);
+		System.out.println(list.stream().findFirst().get());
+
+	}
+
+	private List test17_02(List a) {
+		return Optional.ofNullable(a).map(e ->{
+				e.add("sss");
+				e.add("ddd");
+				return e;
+		}).orElse(null);
+	}
+
+	@Test
+	public void test18() {
+		String test = " {\n" +
+				"        \"Id\": 185248,\n" +
+				"        \"Code\": \"R001699269620\",\n" +
+				"        \"SchoolId\": 1,\n" +
+				"        \"SchoolName\": \"北京学校\",\n" +
+				"        \"OrderState\": 5,\n" +
+				"        \"PayState\": 0,\n" +
+				"        \"PayMoney\": 1130,\n" +
+				"        \"PaidMoney\": 0,\n" +
+				"        \"PayTime\": \"1901-01-01 00:00:00\",\n" +
+				"        \"PayOrderId\": 0,\n" +
+				"        \"BankId\": 0,\n" +
+				"        \"BankName\": \"\",\n" +
+				"        \"PayOrderCode\": null,\n" +
+				"        \"BankReturnCode\": null,\n" +
+				"        \"HasInvoice\": false,\n" +
+				"        \"InvoiceTitle\": \"\",\n" +
+				"        \"CreateTime\": \"2016-10-25 15:53:17\",\n" +
+				"        \"InAccount\": false,\n" +
+				"        \"ErrorMessage\": \"\",\n" +
+				"        \"UserId\": \"xdf0050050485\",\n" +
+				"        \"SystemSource\": \"mobilePay\",\n" +
+				"        \"MarketingSource\": \"\",\n" +
+				"        \"MarketingSourceExt\": \"\",\n" +
+				"        \"AppId\": \"iPocketXDFApp\",\n" +
+				"        \"CreditCardNo\": null,\n" +
+				"        \"OriginalFee\": 1300,\n" +
+				"        \"DeliverFee\": 20,\n" +
+				"        \"VoucherFee\": 190,\n" +
+				"        \"StudentListInfo\": [\n" +
+				"            {\n" +
+				"                \"StudentId\": 1,\n" +
+				"                \"Code\": \"BJ1267941\",\n" +
+				"                \"Name\": \"杨立彬\",\n" +
+				"                \"Gender\": 1,\n" +
+				"                \"IdCard\": \"111111\",\n" +
+				"                \"Mobile\": \"15210812369\",\n" +
+				"                \"Phone\": \"\"\n" +
+				"            }\n" +
+				"        ]\n" +
+				" }       ";
+
+		OrderPO orderPO = JSON.parseObject(test, OrderPO.class);
+		log.info(JSON.toJSONString(orderPO));
+	}
+
+	@Test
+	public void test19() {
+		UserVO userVO = new UserVO();
+		/*if(userVO.getClass() instanceof UserVO) {
+			System.out.println(true);
+		}*/
+		if(UserVO.class.isInstance(userVO.getClass())) {
+			System.out.println(true);
+		}
+		if(Object.class.isInstance(userVO)) {
+			Object o = userVO;
+			System.out.println(true);
+		}
+	}
+
+	@Test
+	public void test20() {
+		Map<String,Long> m1 = new HashMap<>();
+		Map<String,Long> m2 = new HashMap<>();
+		Map<String,Long> m3 = new HashMap<>();
+		m1.put("a",1l);
+		m1.put("b",2l);
 	}
 
 
