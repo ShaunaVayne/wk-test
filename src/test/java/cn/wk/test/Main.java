@@ -3,6 +3,7 @@ package cn.wk.test;
 import cn.wk.domain.TestCopy;
 import cn.wk.domain.TestList;
 import cn.wk.xdf.OrderPO;
+import cn.wk.xdf.PeopleVO;
 import cn.wk.xdf.UserVO;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -386,6 +387,42 @@ public class Main {
 		Map<String,Long> m3 = new HashMap<>();
 		m1.put("a",1l);
 		m1.put("b",2l);
+	}
+
+	@Test
+	public void test21() {
+		PeopleVO p1 = new PeopleVO(1l,"王明明","上海","sh",20);
+		PeopleVO p2 = new PeopleVO(2l,"哈哈","北京","bj",30);
+		PeopleVO p3 = new PeopleVO(3l,"呵呵","广州","gz",40);
+		List<PeopleVO> peopleVOS = Arrays.asList(p1, p2,p3);
+		int sum = peopleVOS.stream().mapToInt(e -> e.getScore()).sum();
+		long count = peopleVOS.stream().mapToInt(e -> e.getScore()).count();
+		int asInt = peopleVOS.stream().mapToInt(e -> e.getScore()).max().getAsInt();
+		double asDouble = peopleVOS.stream().mapToInt(e -> e.getScore()).average().getAsDouble();
+		int asInt1 = peopleVOS.stream().mapToInt(e -> e.getScore()).reduce((x, y) -> x + y).getAsInt();
+
+		log.info("{}:返回结果:{}", "sum", JSON.toJSONString(sum));
+		log.info("{}:返回结果:{}", "count", JSON.toJSONString(count));
+		log.info("{}:返回结果:{}", "asInt", JSON.toJSONString(asInt));
+		log.info("{}:返回结果:{}", "asDouble", JSON.toJSONString(asDouble));
+		log.info("{}:返回结果:{}", "asInt1", JSON.toJSONString(asInt1));
+		List<Integer> list = Arrays.asList(100, 200);
+		IntSummaryStatistics statistics = peopleVOS.stream().mapToInt(e -> e.getScore()).summaryStatistics();
+		IntSummaryStatistics statistics1 = list.stream().mapToInt(e -> e).summaryStatistics();
+		statistics.combine(statistics1);
+		long sum1 = statistics.getSum();
+		log.info("{}:返回结果:{}", "sum1", JSON.toJSONString(sum1));
+
+	}
+
+	@Test
+	public void test22() {
+		List<Integer> list = Arrays.asList(100, 200, 300, 400, 500);
+		/**
+		 * 实现reduce(); reduce()是将集合中所有值结合成一个, 类似于sql中的sum(),avg(),count()等
+		 */
+		Double aDouble1 = (list.stream().map((e) -> e + .12 * e).reduce((sum, e) -> sum + e).get()) / list.size();
+		System.out.println("average:"+aDouble1);
 	}
 
 

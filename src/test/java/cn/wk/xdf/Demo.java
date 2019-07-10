@@ -25,9 +25,9 @@ public class Demo {
     public void test() {
         UserVO u1 = new UserVO(1l,"王琨","男");
         UserVO u2 = new UserVO(2l,"程嘉惠","女");
-        PeopleVO p1 = new PeopleVO(1l,"王明明","上海","sh");
-        PeopleVO p2 = new PeopleVO(2l,"哈哈","北京","bj");
-        PeopleVO p3 = new PeopleVO(3l,"呵呵","广州","gz");
+        PeopleVO p1 = new PeopleVO(1l,"王明明","上海","sh",20);
+        PeopleVO p2 = new PeopleVO(2l,"哈哈","北京","bj",20);
+        PeopleVO p3 = new PeopleVO(3l,"呵呵","广州","gz",20);
         List<UserVO> userVOS = Arrays.asList(u1, u2);
         List<PeopleVO> peopleVOS = Arrays.asList(p1, p2, p3);
 
@@ -48,9 +48,9 @@ public class Demo {
 
     @Test
     public void test2() {
-        PeopleVO p1 = new PeopleVO(1l,"王明明","上海","sh");
-        PeopleVO p2 = new PeopleVO(2l,"哈哈","北京","bj");
-        PeopleVO p3 = new PeopleVO(3l,"呵呵","广州","gz");
+        PeopleVO p1 = new PeopleVO(1l,"王明明","上海","sh",20);
+        PeopleVO p2 = new PeopleVO(2l,"哈哈","北京","bj",20);
+        PeopleVO p3 = new PeopleVO(3l,"呵呵","广州","gz",20);
         List<PeopleVO> peopleVOS = Arrays.asList(p1, p2, p3);
         //List<PeopleVO> peopleVOS = null
         PeopleVO peopleVO = peopleVOS.stream().findFirst().get();

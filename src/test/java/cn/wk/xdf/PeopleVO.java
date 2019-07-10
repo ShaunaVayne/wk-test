@@ -25,4 +25,6 @@ public class PeopleVO {
     private String location;
 
     private String loc;
+
+    private Integer score;
 }
