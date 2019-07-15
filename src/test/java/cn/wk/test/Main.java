@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 
+import java.io.File;
 import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -423,6 +424,74 @@ public class Main {
 		 */
 		Double aDouble1 = (list.stream().map((e) -> e + .12 * e).reduce((sum, e) -> sum + e).get()) / list.size();
 		System.out.println("average:"+aDouble1);
+		Date date = new Date();
+		String url = "http://wxpay.xdf.cn/silenceauthorize/view.do?schoolid=2&callid=2&classcodes=CNNNNN980003&qrcode_id=2BEFFFF6-A712-41AA-831B-2508ED28423C&marketingSources=wechat_tjbj&marketingSourcesExt=xbtj&date="+date.getTime()+"&urlname=wangkun&urlmobile=17621749522&urlgrade=140&urlsfzid=123456&Gender=1";
+		System.out.println(url);
+	}
+
+	@Test
+	public void test23() {
+		List<Integer> list1 = new ArrayList<>();
+		list1.add(1);
+		list1.add(2);
+		List<Integer> list2 = new ArrayList<>();
+		list2.add(3);
+		list2.add(4);
+		list1.addAll(list2);
+		log.info("{}:返回结果:{}", "", JSON.toJSONString(list1));
+		File file = new File("D:\\xdf\\xdf_data\\2019.07.05\\上传班级信息模板.xlsx");
+		String name = file.getName();
+		System.out.println(name);
+	}
+
+	@Test
+	public void test24() {
+	    String year = "2019";
+	    String month = "7";
+	    //得到2019年6-26到7月25的日期数组 2019-06-26 15:17:48 2019-07-25 15:18:39
+		Calendar c = Calendar.getInstance();
+		c.set(Integer.valueOf(year),Integer.valueOf(month) - 2, 26);
+		Date startT = c.getTime();
+		c.set(Integer.valueOf(year),Integer.valueOf(month) - 1, 25);
+		Date endT = c.getTime();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		System.out.println(dateFormat.format(startT));
+		System.out.println(dateFormat.format(endT));
+		List<String> dateList = getDateList(startT, endT);
+		log.info("{}:返回结果:{}", "", JSON.toJSONString(dateList));
+
+	}
+
+	private List<String> getDateList(Date startT, Date endT) {
+		List<String> lDate = new ArrayList<>();
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+		lDate.add(sd.format(startT)+":"+getWeek(startT));
+		Calendar calBegin = Calendar.getInstance();
+		// 使用给定的 Date 设置此 Calendar 的时间
+		calBegin.setTime(startT);
+		Calendar calEnd = Calendar.getInstance();
+		// 使用给定的 Date 设置此 Calendar 的时间
+		calEnd.setTime(endT);
+		// 测试此日期是否在指定日期之后
+		while (endT.after(calBegin.getTime()))
+		{
+			// 根据日历的规则，为给定的日历字段添加或减去指定的时间量
+			calBegin.add(Calendar.DAY_OF_MONTH, 1);
+			String week = getWeek(calBegin.getTime());
+			lDate.add(sd.format(calBegin.getTime())+":"+week);
+		}
+		return lDate;
+	}
+
+	public static String getWeek(Date date){
+		String[] weeks = {"星期日","星期一","星期二","星期三","星期四","星期五","星期六"};
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		int week_index = cal.get(Calendar.DAY_OF_WEEK) - 1;
+		if(week_index<0){
+			week_index = 0;
+		}
+		return weeks[week_index];
 	}
 
 
