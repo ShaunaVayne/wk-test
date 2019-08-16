@@ -2,10 +2,9 @@ package cn.wk.xdf;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.IntBinaryOperator;
 import java.util.stream.Collectors;
 
 /**
@@ -20,6 +19,8 @@ public class XdfMain {
     private List<String> list1 = Arrays.asList("1111","2222","3333");
 
     private List<String> list2 = Arrays.asList("1111","2222","3333","4444");
+
+
 
     @Test
     public void jiaoJi() {
@@ -88,6 +89,90 @@ public class XdfMain {
         String[] split = s.split("-");
         System.out.println(split[0]);
         System.out.println(split[1]);
+    }
+
+    public enum KV{
+        VAR_1("var_1","工作量"),
+        VAR_2("var_2","环境卫生"),
+        VAR_3("var_3","教学辅助"),
+        VAR_4("var_4","教材管理"),
+        VAR_5("var_5","学员打卡率"),
+        VAR_6("var_6","异常考勤"),
+        VAR_7("var_7","安全责任"),
+        VAR_8("var_8","教师满意度"),
+        VAR_9("var_9","客户满意度"),
+        VAR_10("var_10","主管打分"),
+        VAR_11("var_11","附加分1"),
+        VAR_12("var_12","附加分2"),
+        ;
+        private String k;
+        private String v;
+
+        KV() {}
+
+        KV(String k, String v) {
+            this.k = k;
+            this.v = v;
+        }
+
+        public static String getValue(String k) {
+            for (KV value : values()) {
+                if(value.k.equals(k))
+                    return value.v;
+            }
+            return null;
+        }
+    }
+
+    @Test
+    public void test4() {
+        ParseExcelInner inner = new ParseExcelInner();
+        inner.setVar_1("10");
+        inner.setVar_2("20");
+        inner.setVar_3("30");
+        inner.setVar_4("40");
+        inner.setVar_5("50");
+        Class<? extends ParseExcelInner> clazz = inner.getClass();
+        Field[] declaredFields = clazz.getDeclaredFields();
+        for (Field declaredField : declaredFields) {
+            String fieldName = declaredField.getName();
+            if(fieldName.startsWith("var_")) {
+                System.out.println(fieldName);
+                try {
+                    declaredField.setAccessible(true);
+                    String s = declaredField.get(inner) + "";
+                    System.out.println(s);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(KV.getValue(fieldName));
+            }
+        }
+
+    }
+
+    @Test
+    public void test6() {
+        Class<ParseExcelInner> clazz = ParseExcelInner.class;
+        int j = 0;
+        for (Field declaredField : clazz.getDeclaredFields()) {
+            String fieldName = declaredField.getName();
+            if(fieldName.startsWith("var_")) {
+                Integer s = Integer.valueOf(fieldName.split("_")[1]);
+                if(s > j) {
+                    j = s;
+                }
+            }
+        }
+        System.out.println(j);
+    }
+
+    @Test
+    public void test7() {
+        String classCode = "GXV136N";
+        char c = classCode.charAt(3);
+        System.out.println(c);
+        System.out.println(OldClassCodeEnums.getKeyS());
     }
 
 
