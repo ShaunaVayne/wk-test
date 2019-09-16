@@ -49,4 +49,8 @@ public enum OldClassCodeEnums {
     public static List<String> getKeyS() {
         return Arrays.stream(values()).map(e -> e.key).collect(Collectors.toList());
     }
+
+    public static List<String> getByVal(String v) {
+        return Arrays.stream(values()).filter(e -> e.val.equals(v)).map(e -> e.key).collect(Collectors.toList());
+    }
 }
